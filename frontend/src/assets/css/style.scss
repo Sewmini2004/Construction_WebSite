@@ -193,7 +193,7 @@ footer{
             position: relative;
             overflow: hidden;
             img{
-                width: 100%;
+                width: 90%;
                 border-radius: 40px;
                 aspect-ratio: 1 / 1.2;
                 object-fit: cover;
@@ -368,3 +368,31 @@ footer{
     
 }
 
+
+
+.sidebar{
+    ul{
+        li{
+            a{
+                display: block;
+                padding: 10px;
+                border-bottom: 1px solid #ccc;
+                
+            }
+        }
+    }
+    
+}
+
+.section-10{
+    .sidebar{
+        border-radius: 40px;
+    }
+}
+
+
+.section-11 {
+    .sidebar {
+        border-radius: 40px;
+    }
+}

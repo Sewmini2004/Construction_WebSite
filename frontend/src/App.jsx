@@ -14,7 +14,25 @@ import Login from './components/backend/Login.jsx';
 import Dashbord from './components/backend/Dashbord.jsx';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import RequireAuth from './components/common/RequireAuth';
+import { default as ShowService } from './components/backend/services/Show';
+import { default as CreateService } from './components/backend/services/Create';
+import { default as EditService } from './components/backend/services/Edit';
+import { default as ShowProject } from './components/backend/projects/Show';
+import { default as EditProject } from './components/backend/projects/Edit';
+import { default as CreateProject } from './components/backend/projects/Create';
+import { default as ShowArticle } from './components/backend/articles/Show';
+import { default as CreateArticle } from './components/backend/articles/Create';
+import { default as EditArticle } from './components/backend/articles/Edit';
+import { default as ShowTestimonial } from './components/backend/testimonial/Show';
+import { default as CreateTestimonial } from './components/backend/testimonial/Create';
+import { default as EditTestimonial } from './components/backend/testimonial/Edit';
+import { default as ShowMember } from './components/backend/members/Show';
+import { default as CreateMember } from './components/backend/members/Create';
+import { default as EditMember } from './components/backend/members/Edit';
+import ServiceDetailes from './components/frontend/ServiceDetailes';
+import ProjectDetail from './components/frontend/ProjectDetail';
+import BlogDetail from './components/frontend/BlogDetail';
 function App() {
   
   return (
@@ -27,9 +45,121 @@ function App() {
           <Route path="/projects" element={<Projects />} />
           <Route path="/blogs" element={<Blogs />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/service/:id" element={<ServiceDetailes />} />
+          <Route path="/project/:id" element={<ProjectDetail />} />
+          <Route path="/blog/:id" element={<BlogDetail />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/dashboard" element={<Dashbord />} />
+          <Route path="admin/dashboard" element={
+            <RequireAuth>
+              <Dashbord />
+            </RequireAuth>
+          
+          } />
+
+            <Route path="admin/services" element={
+            <RequireAuth>
+              <ShowService />
+            </RequireAuth>
+          
+          } />
+
+          <Route path="admin/services/create" element={
+            <RequireAuth>
+              <CreateService/>
+            </RequireAuth>
+          } />
+          
+
+            <Route path="admin/services/edit/:id" element={
+            <RequireAuth>
+              <EditService/>
+            </RequireAuth>
+          } />
+
+
+          
+            <Route path="admin/projects" element={
+            <RequireAuth>
+              <ShowProject/>
+            </RequireAuth>
+          } />
+
+
+          <Route path="admin/projects/create" element={
+            <RequireAuth>
+              <CreateProject/>
+            </RequireAuth>
+          } />
+
+           <Route path="admin/project/edit/:id" element={
+            <RequireAuth>
+              <EditProject/>
+            </RequireAuth>
+          } />
+          
+
+            <Route path="admin/articles" element={
+            <RequireAuth>
+              <ShowArticle/>
+            </RequireAuth>
+          } />
+
+           <Route path="admin/articles/create" element={
+            <RequireAuth>
+              <CreateArticle/>
+            </RequireAuth>
+          } />
+
+          <Route path="admin/articles/edit/:id" element={
+            <RequireAuth>
+              <EditArticle/>
+            </RequireAuth>
+          } />
+
+
+          <Route path="admin/testimonials" element={
+            <RequireAuth>
+              <ShowTestimonial/>
+            </RequireAuth>
+          } />
+
+          <Route path="admin/testimonials/create" element={
+            <RequireAuth>
+              <CreateTestimonial/>
+            </RequireAuth>
+          } />
+
+          <Route path="admin/testimonials/edit/:id" element={
+            <RequireAuth>
+              <EditTestimonial/>
+            </RequireAuth>
+          } />
+
+
+           <Route path="admin/members" element={
+            <RequireAuth>
+              <ShowMember/>
+            </RequireAuth>
+          } />
+        
+        <Route path="admin/members/create" element={
+            <RequireAuth>
+              <CreateMember/>
+            </RequireAuth>
+          } />
+        
+        <Route path="admin/members/edit/:id" element={
+            <RequireAuth>
+              <EditMember/>
+            </RequireAuth>
+          } />
+      
+          
+
+
+
         </Routes>
+
     </BrowserRouter>
     <ToastContainer position="top-center" autoClose={5000} />      
     </>

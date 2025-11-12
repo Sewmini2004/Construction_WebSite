@@ -1,16 +1,21 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Header from '../common/Header'
 import Footer from '../common/Footer'
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from "./context/Auth";
 
-const Login = () => {
 
-    // Removed 'watch' as it's not being used, though it doesn't cause the error.
+const Login = () => { 	
+
+    const { login } = useContext(AuthContext); 
+    const navigate = useNavigate();
     const { register, handleSubmit, formState: { errors } } = useForm();
     
     const onSubmit = async (data) => {
         // console.log(data);
-
+ 
         const res = await fetch('http://localhost:8000/api/authenticate', {
             method: 'POST',
             headers: {
@@ -25,9 +30,16 @@ const Login = () => {
         if (result.status === false) {
             toast.error(result.message);
             
-        }else{
-            toast.success(result.message);
-            
+        } else {
+            const userInfo = {
+                id: result.id,
+                token: result.token,
+             
+            }
+            localStorage.setItem('userInfo', JSON.stringify(userInfo));
+            login(userInfo);
+
+            navigate('/admin/dashboard');
         }
 
         
@@ -75,7 +87,7 @@ const Login = () => {
                                             {...register("password", {
                                                 required: "Password is required",
                                                 minLength: {
-                                                    value: 6,
+                                                    value: 4,
                                                     message: "Password must be at least 6 characters"
                                                 }
                                             })}
